@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- This is just a demo how to generate icon with link based on the value of preceding input field (if that field is of type URL) -->
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Icon with Link after URL Input - Demo</title>¨
+
+    <!-- Using JQuery because it is easier -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <!-- A custom script we need -->
+    <script>
+        //We run the below funcion after the page fully loads
+        window.onload = addIconToEveryURLInput;
+
+        function addIconToEveryURLInput() {
+
+            //Firstly, we add the icon wrapped by an empty link
+           $('input[type="url"]').after('&nbsp;<a href="#" target="_blank"><span class="material-icons" name="linkIcon">link</span></a>');
+
+           //We wait for any URL input field to change
+           $('input[type="url"]').change(function() {
+
+                //We read the value of the field which changed
+                var webLink = $(this).val();
+                //Just checking if we read it well
+                console.log(webLink);
+
+                //We do not need the next two lines, but keeping them just in case
+                //var webAnchor = '<a href="' + webLink + '" target="_blank" />';
+                //console.log(webAnchor);¨
+
+                //This guy does the magic and updates the href in the link
+                $(this).next().attr("href", webLink);
+
+            }); 
+        };
+    </script>
+
+    <!-- We also need some beautiful icons-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <!-- We can randomly add any inputs, our script will add icon to every input of the type "URL"-->
+    <p>
+        <label for="www">Web link: </label>
+        <input name="www"  type="url" value="https://" >
+    </p>
+
+    <p>
+        <label for="text">Text: </label>
+        <input name="text" type="text" value="Lorem ipsum" >
+    </p>
+
+    <p>
+    <label for="www2">Web link 2: </label>
+        <input name="www2" class="input" type="url" value="https://">
+    </p>
+
+    <p>
+        <label for="text2">Text2: </label>
+        <input name="text2" type="text" value="Lorem ipsum" >
+    </p>
+
+    <p>
+        <label for="www3">Web link 3: </label>
+            <input name="www3" class="input" type="url" value="https://">
+        </p>
+    
+</body>
+
+</html>
